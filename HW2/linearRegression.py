@@ -6,18 +6,18 @@ import scipy
 
 def linearRegression(data_file):
     df = read_csv(data_file, delimiter = ',')
-    df2 = df.dropna()
+    df2 = df.dropna() #deletes rows which have missing values
     data_no_missing = np.array(df2.values, dtype="float64")
     rows, columns = data_no_missing.shape
 
     X = np.ones((rows, columns), dtype="float64") #creates X matrix with ones
     for i in range(rows):
-        for j in range(columns-1):
+        for j in range(columns-1): #asssuming first column has Y values, second, third ... columns have X values
             X[i][j+1] = data_no_missing[:, j+1][i] #first column has ones, other columns has X values
 
     Y = np.ones((rows,1), dtype="float64") #creates Y matrix with ones
     for i in range(rows):
-        Y[i] = data_no_missing[:, 0][i] #appends Y values to Y matrix
+        Y[i] = data_no_missing[:, 0][i] #appends Y values to Y matrix. I assume "0" column has Y values in file
 
     beta = np.array(np.matmul(np.matmul(np.linalg.inv(np.matmul(X.T, X)),X.T),Y), dtype="float64") #finds beta values
 
@@ -36,8 +36,8 @@ def linearRegression(data_file):
 
     confidence_intervals = np.ones((columns,2), dtype="float64")
     for i in range(len(df.columns)):
-        confidence_intervals[i][0] = beta[i] - scipy.stats.t.ppf(q=.975,df=rows - (columns - 1) - 1) * standard_deviations[i]
-        confidence_intervals[i][1] = beta[i] + scipy.stats.t.ppf(q=.975,df=rows - (columns - 1) - 1) * standard_deviations[i]
+        confidence_intervals[i][0] = beta[i] - scipy.stats.t.ppf(q=.975,df=rows - (columns - 1) - 1) * standard_deviations[i] #calculates lower limit of confidence interval
+        confidence_intervals[i][1] = beta[i] + scipy.stats.t.ppf(q=.975,df=rows - (columns - 1) - 1) * standard_deviations[i] #calculates upper limit of confidence interval
 
     #print(X)
     #print(Y)
@@ -48,4 +48,5 @@ def linearRegression(data_file):
     #print(variance)
     #print(standard_deviations)
     #print(confidence_intervals)
+    #print(beta.shape)
     return(beta, standard_deviations, confidence_intervals) #returns beta values, their standard deviation, their 95% confidence intervals
