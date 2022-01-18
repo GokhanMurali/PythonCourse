@@ -122,3 +122,43 @@ y_pred_RFR_optimized = regressor_RFR_optimized.predict(Xtest)
 MSE_RFR_optimized = mean_squared_error(Ytest, y_pred_RFR_optimized)
 MAE_RFR_optimized = mean_absolute_error(Ytest, y_pred_RFR_optimized)
 MSE_RFR_optimized,MAE_RFR_optimized
+
+#regression between sex and medical cost
+regressor_RFR_optimized.fit(np.reshape(np.array(Xtrain[0]), (-1, 1)), Ytrain)
+y_pred1 = regressor_RFR_optimized.predict(np.reshape(np.array(Xtest[0]), (-1, 1)))
+#calculated MSE to measure model performance
+MSE_RFR_optimized = mean_squared_error(Ytest, y_pred1)
+MAE_RFR_optimized = mean_absolute_error(Ytest, y_pred1)
+MSE_RFR_optimized,MAE_RFR_optimized
+
+#regression between smoking and medical cost
+regressor_RFR_optimized.fit(np.reshape(np.array(Xtrain[2]), (-1, 1)), Ytrain)
+y_pred1 = regressor_RFR_optimized.predict(np.reshape(np.array(Xtest[2]), (-1, 1)))
+#calculated MSE to measure model performance
+MSE_RFR_optimized = mean_squared_error(Ytest, y_pred1)
+MAE_RFR_optimized = mean_absolute_error(Ytest, y_pred1)
+MSE_RFR_optimized,MAE_RFR_optimized
+
+#regression between bmi and medical cost
+regressor_RFR_optimized.fit(np.reshape(np.array(Xtrain['bmi']), (-1, 1)), Ytrain)
+y_pred1 = regressor_RFR_optimized.predict(np.reshape(np.array(Xtest['bmi']), (-1, 1)))
+#calculated MSE to measure model performance
+MSE_RFR_optimized = mean_squared_error(Ytest, y_pred1)
+MAE_RFR_optimized = mean_absolute_error(Ytest, y_pred1)
+MSE_RFR_optimized,MAE_RFR_optimized
+
+#regression between age and medical cost
+regressor_RFR_optimized.fit(np.reshape(np.array(Xtrain['age']), (-1, 1)), Ytrain)
+y_pred1 = regressor_RFR_optimized.predict(np.reshape(np.array(Xtest['age']), (-1, 1)))
+#calculated MSE to measure model performance
+MSE_RFR_optimized = mean_squared_error(Ytest, y_pred1)
+MAE_RFR_optimized = mean_absolute_error(Ytest, y_pred1)
+MSE_RFR_optimized,MAE_RFR_optimized
+
+#regression between children and medical cost
+regressor_RFR_optimized.fit(np.reshape(np.array(Xtrain['children']), (-1, 1)), Ytrain)
+y_pred1 = regressor_RFR_optimized.predict(np.reshape(np.array(Xtest['children']), (-1, 1)))
+#calculated MSE to measure model performance
+MSE_RFR_optimized = mean_squared_error(Ytest, y_pred1)
+MAE_RFR_optimized = mean_absolute_error(Ytest, y_pred1)
+MSE_RFR_optimized,MAE_RFR_optimized
